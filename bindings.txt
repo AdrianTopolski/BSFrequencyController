@@ -1,0 +1,26 @@
+1680.0 1.0
+w k t
+d k p
+a k p
+s k p
+space k t
+left c p
+left c p
+right c p
+0 m p
+2 m p
+1 m p
+3 m p
+shiftleft k t
+1 k p
+2 k p
+ctrlleft k t
+3 k p
+e k c
+4 k p
+5 k p
+6 k p
+7 k p
+8 k p
+9 k p
+0 k p
