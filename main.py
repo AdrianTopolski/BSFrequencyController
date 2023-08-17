@@ -2,13 +2,9 @@ import numpy
 import numpy as np
 import pyaudio
 import time
-import librosa
-from librosa import feature
 import matplotlib.pyplot as plt
-import pydirectinput
 import controller
 import keyboard
-from threading import Thread
 
 class AudioHandler(object):
     def __init__(self):
@@ -22,6 +18,7 @@ class AudioHandler(object):
         self.stream = None
         self.k_controller = None
         self.thread = None
+        self.activeLastFrame = False
 
     def start(self):
         self.p = pyaudio.PyAudio()
@@ -53,6 +50,7 @@ class AudioHandler(object):
 
     def callback(self, in_data, frame_count, time_info, flag):
         if keyboard.is_pressed('enter'):
+            self.activeLastFrame = True
             numpy_array = numpy.frombuffer(in_data, dtype=numpy.float32)
             fft = np.fft.fft(numpy_array)
             spectrum = np.abs(fft)
@@ -70,6 +68,9 @@ class AudioHandler(object):
             # plt.ylabel("Magnitude")
             # plt.title("Powerspectrum")
             # plt.show()
+        elif self.activeLastFrame:
+            self.activeLastFrame = False
+            self.k_controller.RegisterFreqValue(0, 0.0)
         return None, pyaudio.paContinue
 
     def mainloop(self):
@@ -91,6 +92,3 @@ except KeyboardInterrupt:
 finally:
     audio.stop()
     print("Stopped.")
-
-
-#MAX WHISTLE 1680

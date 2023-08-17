@@ -1,3 +1,18 @@
+# Lines starting with # or empty new lines are ignored
+# First line defines [the highest frequency you can produce with whistling] [minimum frequency amplitude necessary to manipulate input]
+# Every other line defines inputs automatically mapped to frequencies from your highest frequency to zero in descending order
+# input definitions are read as follows:
+# [what (input identifier)] [where (input device/action)] [how (how should the program behave when the corresponding frequency is detected)]
+# what - for keyboard keys check https://pyautogui.readthedocs.io/en/latest/keyboard.html#keyboard-keys
+#      - for mouse buttons check https://pyautogui.readthedocs.io/en/latest/mouse.html
+#      - for mouse movements: 0 = right; 1 = up; 2 = left; 3 = down
+# where - k = keyboard
+#       - m = mouse movement
+#       - c = mouse click
+# how - p = press (key is pressed for as long as you maintain the frequency)
+#     - c = click (key is pressed and immediately released only once for the entire duration of maintaining the frequency)
+#     - t = toggle (acts like a switch, when the correct frequency is registered, flips the switch and then waits for the frequency to change)
+# push to talk button is Enter (currently hardcoded)
 1680.0 1.0
 w k t
 d k p

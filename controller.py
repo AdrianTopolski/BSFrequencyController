@@ -78,7 +78,7 @@ class Controller(object):
                     self.min_amplitude = float(words[1])
                     i += 1
                     continue
-                # key - k, c - click, m - mouse, s - scroll, press - p/toggle (untoggle condition) - t/ periodic press toggle (untoggle condition) - c
+
                 md_list = self.CreateKeybindMetadata(words)
                 print(md_list)
                 self.list_array.append(md_list)
@@ -110,7 +110,7 @@ class Controller(object):
                 if val[-2]:
                     val[-2] = False
 
-    # what should happen when a key is pressed
+
     def keypress(self, l):
         if l[2] == 'p':
             self.turnoffallpress(l)
@@ -161,8 +161,7 @@ class Controller(object):
             pydirectinput.keyDown(l[0])
             l[-1] = True
         elif l[1] == 'm':
-            #x,y = self.mouse_dir_trans[l[0]]
-            #pydirectinput.moveRel(int(x * 20), int(y * 20), _pause=False, relative=True)
+
             l[-1] = True
         elif l[1] == 'c':
             pydirectinput.mouseDown(button=l[0])
@@ -187,20 +186,14 @@ class Controller(object):
         print("Thread Started")
 
     def run(self):
-        #print("Run func is running")
         mouse_lists = list()
-        #print(self.list_array)
         for item in self.list_array:
             if item[1] == 'm':
                 mouse_lists.append(item)
-        #print(mouse_lists)
 
-        #print("Starting while loop")
         while True:
             for i in mouse_lists:
                 if i[-1]:
-                    #print("MOVING MOUSE")
                     x, y = self.mouse_dir_trans[int(i[0])]
                     pydirectinput.moveRel(int(x * 8), int(y * 8), _pause=False, relative=True)
-            #print("Sleeping")
             time.sleep(0.005)
